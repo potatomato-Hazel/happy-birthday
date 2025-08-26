@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生日快乐 🎂</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to top right, #ff9a9e, #fad0c4);
+      overflow: hidden;
+      font-family: 'Microsoft Yahei', sans-serif;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #fff;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      z-index: 10;
+      animation: fadeIn 3s ease-in-out;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 60px;
+      height: 80px;
+      background: red;
+      border-radius: 50% 50% 50% 50%;
+      opacity: 0.7;
+      animation: floatUp 10s infinite ease-in;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background: #fff;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 一凡 生日快乐！🎂</h1>
+
+  <!-- 背景音乐 -->
+  <audio id="bg-music" src="music.mp3" autoplay loop hidden></audio>
+
+  <script>
+    function randomColor() {
+      const colors = ["#ff6b6b", "#feca57", "#48dbfb", "#1dd1a1", "#5f27cd"];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function createBalloon() {
+      const balloon = document.createElement("div");
+      balloon.classList.add("balloon");
+      balloon.style.left = Math.random() * window.innerWidth + "px";
+      balloon.style.background = randomColor();
+      balloon.style.animationDuration = 5 + Math.random() * 5 + "s";
+      document.body.appendChild(balloon);
+
+      setTimeout(() => {
+        balloon.remove();
+      }, 10000);
+    }
+
+    setInterval(createBalloon, 500);
+  </script>
+</body>
+</html>
